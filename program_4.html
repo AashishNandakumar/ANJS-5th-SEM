@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FactorialAndSquareApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Mathematics</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("FactorialAndSquareApp", [])
+        app.controller("FactorialAndSquareController", ($scope) => {
+            $scope.factorial = undefined
+            $scope.square = undefined
+            $scope.num = null
+
+            $scope.factorialCalculate = () => {
+                if ($scope.num < 0){
+                    alert("cannot compute factorial of negative numbers")
+                }
+                else if($scope.num <= 1){
+                    $scope.factorial = 1
+                }
+                else{
+                    let temp = 1
+
+                    for (let i=2;i<=$scope.num;i++){
+                        temp *= i
+                    }
+
+                    $scope.factorial = temp
+                }
+            }
+
+            $scope.squareCalculate = () => {
+                $scope.square = $scope.num ** 2
+            }
+
+        })
+    </script>
+</head>
+<body ng-controller="FactorialAndSquareController">
+    <label>
+        Enter Number:
+        <input type="number" ng-model="num">
+    </label>
+    <button ng-click="squareCalculate()">SQUARE</button>
+    <button ng-click="factorialCalculate()">FACTORIAL</button>
+
+    <p ng-show="square!==undefined">Square: {{square}}</p>
+    <p ng-show="factorial!==undefined">Factorial: {{factorial}}</p>
+</body>
+</html>

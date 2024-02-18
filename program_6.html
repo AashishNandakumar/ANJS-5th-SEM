@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--TO DO App-->
+<html lang="en" ng-app="ToDoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("ToDoApp", [])
+        app.controller("ToDoController", ($scope) => {
+            $scope.tasks_list = ['breathe']
+            $scope.task = null
+
+            $scope.addTasks = () => {
+                if ($scope.task) {
+                    $scope.tasks_list.push($scope.task)
+                    $scope.task = ''
+                }
+            }
+
+            $scope.deleteTasks = (index) => {
+                $scope.tasks_list.splice(index, 1)
+            }
+
+            $scope.updateTasks = (index) => {
+                $scope.task = prompt("Enter updated task: ")
+                if ($scope.task) {
+                    $scope.tasks_list.splice(index, 1, $scope.task)
+                    $scope.task = ''
+                }
+            }
+        })
+    </script>
+</head>
+<body ng-controller="ToDoController">
+    <h1>TO-DO</h1>
+    <table border="1px solid" style="width: 60%; text-align: center">
+        <thead>
+            <tr>
+                <th>ITEM</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="task in tasks_list">
+                <td>{{task}}</td>
+                <td><button ng-click="updateTasks($index)">UPDATE</button></td>
+                <td><button ng-click="deleteTasks($index)">DELETE</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Total Tasks: {{tasks_list.length}}</p>
+    <br>
+    <label>
+        Enter new task:
+        <input type="text" ng-model="task" placeholder="dishes">
+    </label>
+    <button ng-click="addTasks()">ADD</button>
+</body>
+</html>

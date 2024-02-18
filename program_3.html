@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--Calculator-->
+<html lang="en" ng-app="CalciApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("CalciApp", [])
+        app.controller("CalciController", ($scope) => {
+            $scope.n1 = 1
+            $scope.n2 = 1
+            $scope.operator = '+'
+            $scope.res = undefined
+
+            $scope.calculate = () => {
+                try{
+                    switch ($scope.operator){
+
+                        case '+':
+                            $scope.res = $scope.n1 + $scope.n2
+                            break
+                        case '-':
+                            $scope.res = $scope.n1 - $scope.n2
+                            break
+                        case '*':
+                            $scope.res = $scope.n1 * $scope.n2
+                            break
+
+                        case '/':
+                            $scope.res = $scope.n1 / $scope.n2
+                            break
+
+                    }
+                }catch (Exception){
+                    alert("Error: "+Exception)
+                }
+            }
+
+        })
+
+    </script>
+</head>
+<body ng-controller="CalciController">
+    <label>
+        Number 1:
+        <input type="number" ng-model="n1">
+    </label>
+    <label>
+        Operator:
+        <select ng-model="operator">
+            <option value="+">ADD</option>
+            <option value="-">SUB</option>
+            <option value="*">MUL</option>
+            <option value="/">DIV</option>
+        </select>
+    </label>
+    <label>
+        Number 2:
+        <input type="number" ng-model="n2">
+    </label>
+    <button ng-click="calculate()">
+        Calculate
+    </button>
+    <p ng-show="res!==undefined">Result: {{res}}</p>
+</body>
+</html>

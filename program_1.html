@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--display full name-->
+<html lang="en" ng-app="NameApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Fullname</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("NameApp", [])
+        app.controller("NameController", ($scope) => {
+            $scope.firstName = null
+            $scope.lastName = null
+            $scope.name = undefined
+
+            $scope.fullName = () => {
+                if ($scope.firstName && $scope.lastName)
+                    $scope.name = $scope.firstName + ' ' +  $scope.lastName
+            }
+        })
+    </script>
+</head>
+<body ng-controller="NameController" >
+    <label>
+        Enter First name:
+        <input placeholder="John" type="text" ng-model="firstName"/>
+    </label>
+    <label >
+        Enter Last name
+        <input placeholder="Doe" type="text" ng-model="lastName">
+    </label>
+    <button ng-click="fullName()">Fullname?</button><br/>
+    <p ng-show="name!==undefined">Fullname: {{name}}</p>
+</body>
+</html>

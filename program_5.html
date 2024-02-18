@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--students and their CGPA-->
+<html lang="en" ng-app="StudentApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("StudentApp", [])
+        app.controller("StudentController", ($scope) => {
+            $scope.studentDetails = [{name :'aashish', cgpa: '9.4'}]
+            $scope.studentName = null
+            $scope.studentCgpa = null
+
+            $scope.addStudentDetails = () => {
+                if ($scope.studentName && $scope.studentCgpa) {
+                    $scope.studentDetails.push({
+                        name: $scope.studentName,
+                        cgpa: $scope.studentCgpa
+                    })
+                }
+                $scope.studentName = ''
+                $scope.studentCgpa = ''
+            }
+        })
+    </script>
+</head>
+<body ng-controller="StudentController">
+    <h1>Student details:</h1>
+    <table border="1px solid" style="text-align: center; width: 40%;">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>CGPA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in studentDetails">
+                <td>{{student.name}}</td>
+                <td>{{student.cgpa}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Student count: {{studentDetails.length}}</p>
+    <br>
+    <h3>Enter new student details</h3>
+    <label>
+        Enter new student name:
+        <input type="text" ng-model="studentName" placeholder="John">
+    </label>
+    <br>
+    <label>
+        Enter new student cgpa:
+        <input type="text" ng-model="studentCgpa" placeholder="9">
+    </label>
+    <br>
+    <button ng-click="addStudentDetails()">ADD</button>
+</body>
+</html>

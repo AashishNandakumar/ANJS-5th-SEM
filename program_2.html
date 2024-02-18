@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--Add, Delete, View Shopping list-->
+<html lang="en" ng-app="ShopApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let app = angular.module("ShopApp", [])
+        app.controller("ShopController", ($scope) => {
+            $scope.items = ['Milk']
+            $scope.newItem = ''
+
+            $scope.addItem = (newItem) => {
+                $scope.items.push(newItem)
+                $scope.newItem = ''
+            }
+
+            $scope.removeItem = (itemIndex) => {
+                $scope.items.splice(itemIndex, 1)
+            }
+        })
+    </script>
+</head>
+<body ng-controller="ShopController">
+    <h1>Shopping Items</h1>
+    <table border="1px solid" width="50%">
+        <thead>
+            <tr>
+                <th>ITEM</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <td style="text-align: center">{{item}}</td>
+                <td style="text-align: center">
+                    <button ng-click="removeItem($index)" >
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <label>
+        Add New Items
+        <input type="text" ng-model="newItem">
+    </label>
+    <button ng-click="addItem(newItem)">ADD</button>
+</body>
+</html>
